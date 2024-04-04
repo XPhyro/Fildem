@@ -18,8 +18,8 @@ def run_keybinder(callback):
 	DBusGMainLoop(set_as_default=True)
 	dbus_menu = DbusMenu()
 
-	if not is_wayland():
-		Keybinder.bind('<Alt>space', callback, dbus_menu)
+	# if not is_wayland():
+	# 	Keybinder.bind('<Super>Escape', callback, dbus_menu)
 	# GLib.timeout_add_seconds(1, callback)
 	try:
 		GLib.MainLoop().run()
@@ -27,7 +27,8 @@ def run_keybinder(callback):
 		GLib.MainLoop().quit()
 
 def main():
-	run_keybinder(default_hud_menu)
+	# run_keybinder(default_hud_menu)
+	run_keybinder(rofi_hud_menu)
 
 
 def rofi():

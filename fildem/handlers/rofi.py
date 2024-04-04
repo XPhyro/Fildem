@@ -7,8 +7,6 @@ from gi.repository import Gtk
 from subprocess import Popen
 from subprocess import PIPE
 
-from fildem.utils.menu import DbusMenu
-
 
 def rgba_to_hex(color):
 	red   = int(color.red * 255)
@@ -20,10 +18,10 @@ def rgba_to_hex(color):
 
 class RofiMenu:
 
-	def __init__(self):
+	def __init__(self, dbus_menu):
 		self.settings  = Gtk.Settings.get_default()
 		self.context   = Gtk.StyleContext()
-		self.dbus_menu = DbusMenu()
+		self.dbus_menu = dbus_menu
 
 		self.settings.set_property('gtk-application-prefer-dark-theme', True)
 
@@ -142,7 +140,7 @@ class RofiMenu:
 			'-color-urgent', self.theme_colors['urgent']
 		]
 
-		self.menu_proc = Popen(options, stdout=PIPE, stdin=PIPE)
+		self.menu_proc = Popen(["/home/xphyro/.local/bin/usr/fildem-menu"], stdout=PIPE, stdin=PIPE)
 		self.menu_proc.stdin.write(self.items)
 
 	def run(self):
